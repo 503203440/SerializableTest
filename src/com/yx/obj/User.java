@@ -5,7 +5,7 @@ import java.util.Date;
 
 public class User implements Serializable{
 	
-//	private static final long serialVersionUID=666666;
+	private static final long serialVersionUID=666666;
 	
 	private String username="default name";
 	private Integer age=18;
