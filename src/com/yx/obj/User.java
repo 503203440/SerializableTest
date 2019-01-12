@@ -1,6 +1,7 @@
 package com.yx.obj;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class User implements Serializable{
@@ -30,10 +31,10 @@ public class User implements Serializable{
 		this.birthday = birthday;
 	}
 	
-	//ÖØĞ´toString
+	//é‡å†™toString
 	@Override
 	public String toString() {
-		return "User [username=" + username + ", age=" + age + ", birthday=" + birthday + "]";
+		return "User [username=" + username + ", age=" + age + ", birthday=" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(birthday) + "]";
 	}
 	
 	

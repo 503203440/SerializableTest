@@ -9,20 +9,21 @@ import java.io.ObjectOutputStream;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import com.yx.obj.User;
 
 /**
- * ÕâÊÇÒ»¸ö½«¶ÔÏóĞòÁĞ»¯µ½±¾µØµÄ´æ´¢µÄ°¸Àı
- * Èç¹ûUserÀà¶ÔÏó²»ÊµÏÖĞòÁĞ»¯½Ó¿Ú£¬write·½·¨½«ÎŞ·¨½øĞĞ£¬¶ÔÏóÃ»ÓĞÊµÏÖĞòÁĞ»¯½Ó¿ÚÎŞ·¨³Ö¾Ã»¯µ½Ó²ÅÌÖĞ
- * »á±¨³öÈçÏÂ´íÎó£ºjava.io.NotSerializableException
- * Èç¹ûÒª³Ö¾Ã»¯µÄÀàUserÊµÏÖÁËĞòÁĞ»¯½Ó¿ÚSerializable£¬µ«ÊÇÃ»ÓĞ¶¨Òå¾²Ì¬³£Á¿serialVersionUID£¬
- * ÄÇÃ´µ±ÏÂ´ÎÄÚ´æÖĞµÄ¸Ã¶ÔÏóµÄID±ä»¯ÒÔºóÔÙ´Ó³Ö¾Ã»¯µÄuser.objÖĞ¶ÁÈ¡µ½µÄÊÇÖ®Ç°µÄ°æ±¾£¬½«»á±¨³öjava.io.InvalidClassException: 
+ * è¿™æ˜¯ä¸€ä¸ªå°†å¯¹è±¡åºåˆ—åŒ–åˆ°æœ¬åœ°çš„å­˜å‚¨çš„æ¡ˆä¾‹
+ * å¦‚æœUserç±»å¯¹è±¡ä¸å®ç°åºåˆ—åŒ–æ¥å£ï¼Œwriteæ–¹æ³•å°†æ— æ³•è¿›è¡Œï¼Œå¯¹è±¡æ²¡æœ‰å®ç°åºåˆ—åŒ–æ¥å£æ— æ³•æŒä¹…åŒ–åˆ°ç¡¬ç›˜ä¸­
+ * ä¼šæŠ¥å‡ºå¦‚ä¸‹é”™è¯¯ï¼šjava.io.NotSerializableException
+ * å¦‚æœè¦æŒä¹…åŒ–çš„ç±»Userå®ç°äº†åºåˆ—åŒ–æ¥å£Serializableï¼Œä½†æ˜¯æ²¡æœ‰å®šä¹‰é™æ€å¸¸é‡serialVersionUIDï¼Œ
+ * é‚£ä¹ˆå½“ä¸‹æ¬¡å†…å­˜ä¸­çš„è¯¥å¯¹è±¡çš„IDå˜åŒ–ä»¥åå†ä»æŒä¹…åŒ–çš„user.objä¸­è¯»å–åˆ°çš„æ˜¯ä¹‹å‰çš„ç‰ˆæœ¬ï¼Œå°†ä¼šæŠ¥å‡ºjava.io.InvalidClassException: 
  * com.yx.obj.User; local class incompatible: 
  * stream classdesc serialVersionUID = 666666, 
  * local class serialVersionUID = -8571363865966925830
- * Ä¬ÈÏÇé¿öÏÂ£¬ÊµÏÖÁËĞòÁĞ»¯½Ó¿ÚµÄ¶ÔÏó£¬jvm»á×Ô¶¯¸øÉú³ÉÒ»¸ö¾²Ì¬³£Á¿serialVersionUIDÀ´×÷ÎªÀàµÄÎ¨Ò»±êÊ¶£¬
- * µ«ÎÒÃÇ×îºÃ¸øĞèÒªĞòÁĞ»¯µÄÀàĞ´Ò»¸öÃ÷È·µÄserialVersionUID£¬ÕâÑù²»ÈİÒ×³ö´í
+ * é»˜è®¤æƒ…å†µä¸‹ï¼Œå®ç°äº†åºåˆ—åŒ–æ¥å£çš„å¯¹è±¡ï¼Œjvmä¼šè‡ªåŠ¨ç»™ç”Ÿæˆä¸€ä¸ªé™æ€å¸¸é‡serialVersionUIDæ¥ä½œä¸ºç±»çš„å”¯ä¸€æ ‡è¯†ï¼Œ
+ * ä½†æˆ‘ä»¬æœ€å¥½ç»™éœ€è¦åºåˆ—åŒ–çš„ç±»å†™ä¸€ä¸ªæ˜ç¡®çš„serialVersionUIDï¼Œè¿™æ ·ä¸å®¹æ˜“å‡ºé”™
  * @author YX
  *
  */
@@ -30,21 +31,17 @@ public class TestMain {
 
 	public static void main(String[] args) {
 //		write();
+
 		read();
 	}
 
 	
 	public static void write() {
 		User user = new User();
-		user.setUsername("Ò°ĞÄ");
+		user.setUsername("æ— å¿ƒ");
 		user.setAge(22);
 
-		DateFormat dateformat = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			user.setBirthday(dateformat.parse("1996-10-01"));
-		} catch (ParseException e) {
-			System.out.println("ÈÕÆÚ×ª»»Òì³£:"+e.getMessage());
-		}
+		user.setBirthday(new Date());
 
 		System.out.println(user.toString());
 		
@@ -52,25 +49,25 @@ public class TestMain {
 		FileOutputStream fos = null;
 		ObjectOutputStream oos = null;
 		try {
-			// Èç¹û²»´æÔÚÔò´´½¨ĞÂÎÄ¼ş
+			// å¦‚æœä¸å­˜åœ¨åˆ™åˆ›å»ºæ–°æ–‡ä»¶
 			if (!file.exists()) {
 				file.createNewFile();
 			}
 
-			// ÉèÖÃÎÄ¼şÊä³öÁ÷
+			// è®¾ç½®æ–‡ä»¶è¾“å‡ºæµ
 			fos=new FileOutputStream(file);
 
-			// ´´½¨objectÁ÷
+			// åˆ›å»ºobjectæµ
 			oos = new ObjectOutputStream(fos);
 			
-			//ÏòÎÄ¼şÖĞÊä³ö¶ÔÏó
+			//å‘æ–‡ä»¶ä¸­è¾“å‡ºå¯¹è±¡
 			oos.writeObject(user);
 			oos.flush();
 			oos.close();
 			fos.close();
 			
 		} catch (IOException e) {
-			System.out.println("Á÷Òì³£:"+e.getMessage());
+			System.out.println("æµå¼‚å¸¸:"+e.getMessage());
 			e.printStackTrace();
 		}
 	}
@@ -87,10 +84,10 @@ public class TestMain {
 			
 			User user=(User) ois.readObject();
 			
-			System.out.println("read¶ÁÈ¡µ½ĞòÁĞ»¯ºóµÄ¶ÔÏó£º"+user.toString());
+			System.out.println("readè¯»å–åˆ°åºåˆ—åŒ–åçš„å¯¹è±¡ï¼š"+user.toString());
 			
 		} catch (Exception e) {
-			System.out.println("IOÒì³££º"+e.getMessage());
+			System.out.println("IOå¼‚å¸¸ï¼š"+e.getMessage());
 			e.printStackTrace();
 		}
 		
